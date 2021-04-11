@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718dfd7e1a455d24f82bc1df50ada5b7, type: 3}
+  m_Name: StyleCollection
+  m_EditorClassIdentifier: 
+  menuTreeBg: {fileID: 2800000, guid: b1ddae584adda1f4dbf1bfc46b29d9ba, type: 3}
+  menuTreeBgColor: {r: 0.24705884, g: 0.24705884, b: 0.24705884, a: 1}

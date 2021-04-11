@@ -4,21 +4,27 @@ using UnityEngine;
 using Plot.Utility;
 using Plot.Const;
 using System;
+using Plot.UI;
 
 namespace Plot.Core
 {
-    public class GameMianManger : Singleton<GameMianManger>
+    public class GameApp : Singleton<GameApp>
     {
         private GameObject mgrHolder;
         private List<ManagerInfo> mgrInfos;
         public bool pauseGame;
 
-        public GameMianManger()
+        public UIManager UIManager
+        {
+            get;set;
+        }
+
+        public GameApp()
         {
             mgrInfos = new List<ManagerInfo>();
         }
 
-        public static GameMianManger instance
+        public static GameApp instance
         {
             get
             {
@@ -46,6 +52,8 @@ namespace Plot.Core
 
         public void SetupManager()
         {
+            UIManager = AddManager<UIManager>(ManagerInfo.NO_TICK_INTERVAL);
+
 
             mgrHolder.AddComponent<GameUpdateor>();
         }
@@ -80,7 +88,7 @@ namespace Plot.Core
                 {
                     if (GameLog.EnableLog(GameLog.LV_DEV_ERROR))
                     {
-                        GameLog.LogDevError("DestroyAllManager Error " + ex);
+                        GameLog.LogDevError(string.Format("DestroyAllManager  {0}  Error {1}", mgrInfos[i].managerName, ex));
                     }
                 }
             }
@@ -119,7 +127,7 @@ namespace Plot.Core
                 {
                     if (GameLog.EnableLog(GameLog.LV_DEV_ERROR))
                     {
-                        GameLog.LogDevError("UpdateAllManager Error " + ex);
+                        GameLog.LogDevError(string.Format("UpdateAllManager {0} Error {1}", info.managerName, ex));
                     }
                 }
             }
@@ -146,7 +154,7 @@ namespace Plot.Core
                 {
                     if (GameLog.EnableLog(GameLog.LV_DEV_ERROR))
                     {
-                        GameLog.LogDevError("LateUpdateAllManager Error " + ex);
+                        GameLog.LogDevError(string.Format("LateUpdateAllManager {0} Error {1}", info.managerName, ex));
                     }
                 }
             }

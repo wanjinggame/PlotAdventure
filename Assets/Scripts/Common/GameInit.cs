@@ -14,8 +14,8 @@ namespace Plot.Core
             {
                 return;
             }
-            GameMianManger.instance.CreateManagerHolder();
-            GameMianManger.instance.SetupManager();
+            GameApp.instance.CreateManagerHolder();
+            GameApp.instance.SetupManager();
         }
 
         // Start is called before the first frame update

@@ -11,7 +11,7 @@ namespace Plot.Core
     {
         private void Awake()
         {
-            GameMianManger.instance.InitAllManager();
+            GameApp.instance.InitAllManager();
         }
 
         // Start is called before the first frame update
@@ -23,12 +23,12 @@ namespace Plot.Core
         // Update is called once per frame
         void Update()
         {
-            GameMianManger.instance.UpdateAllManager();
+            GameApp.instance.UpdateAllManager();
         }
 
         private void LateUpdate()
         {
-            GameMianManger.instance.LateUpdataManager();
+            GameApp.instance.LateUpdataManager();
         }
 
         private void OnApplicationFocus(bool focus)

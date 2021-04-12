@@ -20,7 +20,6 @@ namespace Plot.UI
         {
             base.Destroy();
         }
-
     }
 }
 

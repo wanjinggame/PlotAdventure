@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Plot.UI
 {
+    /// <summary>
+    /// Ê±Ðò  OnCreate-> FindObject -> InitView -> Destory
+    /// </summary>
     public class UIView
     {
         public Transform transform;
@@ -13,12 +16,12 @@ namespace Plot.UI
             this.transform = transform;
         }
 
-        public virtual void InitView()
+        public virtual void FindObject()
         {
 
         }
 
-        public virtual void FindObject()
+        public virtual void InitView()
         {
 
         }

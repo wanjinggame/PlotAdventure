@@ -14,7 +14,6 @@ namespace Plot.UI
         public override void FindObject()
         {
             base.FindObject();
-
         }
 
         public override void InitView()

@@ -15,6 +15,8 @@ namespace Plot.UI
 
         public Dictionary<int, UIBase> openUIList;
 
+        public Transform canvs;
+
         public override void Init()
         {
             base.Init();
@@ -23,6 +25,18 @@ namespace Plot.UI
 
             SetupUITypes();
             SetupUI();
+
+            InitCanvas();
+
+            if (GameLog.EnableLog(GameLog.LV_DEBUG))
+            {
+                GameLog.Log("UIManager Init Success...");
+            }
+        }
+
+        public void InitCanvas()
+        {
+
         }
 
         public void SetupUITypes()
@@ -38,14 +52,26 @@ namespace Plot.UI
             uiPrefabs.Add(UIConst.UI_ID_INIT, "Init_Panel");
         }
 
-        public void OpenUI(int uiId)
+        public UIBase OpenUI(int uiId)
         {
-
+            return OpenUI<UIBase>(uiId);
         }
 
         public T OpenUI<T>(int uiID) where T : UIBase
         {
-
+            var path = GetPrefabPath(uiID);
+            if (string.IsNullOrEmpty(path))
+            {
+                return null;
+            }
+            //to do  resourceManager load ui prefab
+            var uiPrefab = GameApp.instance.resourceManager.Load<GameObject>(path);
+            if (uiPrefab)
+            {
+                var go = UnityEngine.Object.Instantiate(uiPrefab);
+                SetInCanvas(go);
+                var ctrl = go.AddComponent<T>();
+            }
             return null;
         }
 
@@ -70,6 +96,24 @@ namespace Plot.UI
                 return openUIList[uiID];
             }
             return null;
+        }
+
+        public string GetPrefabPath(int uiId)
+        {
+            if (uiPrefabs.ContainsKey(uiId))
+            {
+                return uiPrefabs[uiId];
+            }
+            if (GameLog.EnableLog(GameLog.LV_ERROR))
+            {
+                GameLog.LogError(string.Format("no ui:{0}  config",uiId));
+            }
+            return "";
+        }
+
+        public void SetInCanvas(GameObject gameObject)
+        {
+
         }
     }
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Plot.UI
 {
+    /// <summary>
+    /// Ê±Ðò  OnCreate -> Init -> Destory
+    /// </summary>
     public class UIModel
     {
         public virtual void OnCreate()

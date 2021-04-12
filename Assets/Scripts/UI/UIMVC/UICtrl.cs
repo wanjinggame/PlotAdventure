@@ -4,18 +4,19 @@ using UnityEngine;
 
 namespace Plot.UI
 {
+    /// <summary>
+    /// Ê±Ðò  OnCreate  ->   Init    ->   OnUpdate    ->   Destroy
+    /// </summary>
+    /// <typeparam name="V"></typeparam>
+    /// <typeparam name="M"></typeparam>
     public class UICtrl<V, M> : UIBase where V : UIView, new() where M : UIModel, new()
     {
         public UIModel model;
         public UIView view;
 
-        private void Awake()
+        protected override void OnCreate()
         {
-            Create();
-        }
-
-        void Create()
-        {
+            base.OnCreate();
             model = new V() as UIModel;
             view = new M() as UIView;
 
@@ -25,32 +26,18 @@ namespace Plot.UI
         }
 
         // Start is called before the first frame update
-        void Start()
+        protected override void Init()
         {
+            base.Init();
             view.FindObject();
             view.InitView();
             model.Init();
             Init();
         }
 
-        protected virtual void Init()
+        protected override void Destroy()
         {
-
-        }
-
-        protected virtual void OnCreate()
-        {
-
-        }
-
-        protected virtual void Destroy()
-        {
-
-        }
-
-        private void OnDestroy()
-        {
-            Destroy();
+            base.Destroy();
             view.Destory();
             model.Destory();
         }

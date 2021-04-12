@@ -5,6 +5,7 @@ using Plot.Utility;
 using Plot.Const;
 using System;
 using Plot.UI;
+using Plot.Resource;
 
 namespace Plot.Core
 {
@@ -14,9 +15,14 @@ namespace Plot.Core
         private List<ManagerInfo> mgrInfos;
         public bool pauseGame;
 
-        public UIManager UIManager
+        public UIManager uiManager
         {
-            get;set;
+            get; set;
+        }
+
+        public ResourceManager resourceManager
+        {
+            get; set;
         }
 
         public GameApp()
@@ -52,8 +58,8 @@ namespace Plot.Core
 
         public void SetupManager()
         {
-            UIManager = AddManager<UIManager>(ManagerInfo.NO_TICK_INTERVAL);
-
+            uiManager = AddManager<UIManager>(ManagerInfo.NO_TICK_INTERVAL);
+            resourceManager = AddManager<ResourceManager>(ManagerInfo.NO_TICK_INTERVAL);
 
             mgrHolder.AddComponent<GameUpdateor>();
         }

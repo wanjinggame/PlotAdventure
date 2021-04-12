@@ -20,7 +20,6 @@ namespace Plot.UI
             model = new V() as UIModel;
             view = new M() as UIView;
 
-            OnCreate();
             view.OnCreate(transform);
             model.OnCreate();
         }

@@ -6,6 +6,7 @@ using Plot.Const;
 using System;
 using Plot.UI;
 using Plot.Resource;
+using Plot.Data;
 
 namespace Plot.Core
 {
@@ -17,12 +18,17 @@ namespace Plot.Core
 
         public UIManager uiManager
         {
-            get; set;
+            get; private set;
         }
 
         public ResourceManager resourceManager
         {
-            get; set;
+            get; private set;
+        }
+
+        public DataManager dataManager
+        {
+            get; private set;
         }
 
         public GameApp()
@@ -60,6 +66,7 @@ namespace Plot.Core
         {
             uiManager = AddManager<UIManager>(ManagerInfo.NO_TICK_INTERVAL);
             resourceManager = AddManager<ResourceManager>(ManagerInfo.NO_TICK_INTERVAL);
+            dataManager = AddManager<DataManager>(ManagerInfo.NO_TICK_INTERVAL);
 
             mgrHolder.AddComponent<GameUpdateor>();
         }

@@ -46,6 +46,8 @@ namespace Plot.Core
 #if UNITY_EDITOR
             EditorApplication.quitting -= OnEditorQuit;
 #endif
+            Debug.Log("DestroyAllManager");
+            GameApp.instance.DestroyAllManager();
         }
 
 #if UNITY_EDITOR

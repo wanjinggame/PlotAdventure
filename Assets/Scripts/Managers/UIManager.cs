@@ -5,6 +5,7 @@ using Plot.Utility;
 using Plot.Const;
 using System;
 using Plot.Core;
+using UnityEngine.SceneManagement;
 
 namespace Plot.UI
 {
@@ -36,7 +37,8 @@ namespace Plot.UI
 
         public void InitCanvas()
         {
-
+            canvs = GameObject.Find("Canvas").transform;
+            GameObject.DontDestroyOnLoad(canvs);
         }
 
         public void SetupUITypes()
@@ -69,7 +71,7 @@ namespace Plot.UI
             if (uiPrefab)
             {
                 var go = UnityEngine.Object.Instantiate(uiPrefab);
-                SetInCanvas(go);
+                SetInCanvas(go.transform);
                 var ctrl = go.AddComponent<T>();
             }
             return null;
@@ -106,14 +108,15 @@ namespace Plot.UI
             }
             if (GameLog.EnableLog(GameLog.LV_ERROR))
             {
-                GameLog.LogError(string.Format("no ui:{0}  config",uiId));
+                GameLog.LogError(string.Format("no ui:{0}  config", uiId));
             }
             return "";
         }
 
-        public void SetInCanvas(GameObject gameObject)
+        public void SetInCanvas(Transform tran)
         {
-
+            tran.SetParent(canvs);
+            tran.localPosition = Vector3.zero;
         }
     }
 }

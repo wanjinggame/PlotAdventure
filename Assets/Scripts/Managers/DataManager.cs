@@ -6,34 +6,13 @@ using LitJson;
 using UnityEditor;
 using System.Text;
 using System.IO;
+using Plot.Utility;
 
 namespace Plot.Data
 {
-
     public class DataManager : BaseManager
     {
-        [MenuItem("Test/CreateJson")]
-        static void CreateJson()
-        {
-            var jsonData = new JsonData();
-            var subData = new JsonData();
-            subData["name"] = "¶Ô°×1";
-            subData["poltId"] = 1;
-            subData["bgm"] = "aaa";
-            jsonData["1"] = subData;
-
-            StringBuilder sb = new StringBuilder();
-            JsonWriter jsonWriter = new JsonWriter(sb);
-            jsonWriter.PrettyPrint = true;
-            JsonMapper.ToJson(jsonData, jsonWriter);
-
-            var path = "Assets/Resources/Data/scene_data.json";
-            if (!File.Exists(path))
-            {
-                File.Create(path).Dispose();
-            }
-            File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
-        }
+        const string PATH_FORMAT = "Assets/Resources/Data/{0}.json";
 
         private List<string> datas;
         private Dictionary<string, JsonData> loadedData = new Dictionary<string, JsonData>();
@@ -47,11 +26,29 @@ namespace Plot.Data
 
         public JsonData Load(string dataName)
         {
+            if (!datas.Contains(dataName))
+            {
+                if (GameLog.EnableLog(GameLog.LV_ERROR))
+                {
+                    GameLog.LogError(dataName + " No Exists!");
+                }
+                return null;
+            }
             if (loadedData.ContainsKey(dataName))
             {
                 return loadedData[dataName];
             }
+#if UNITY_EDITOR
+            var path = string.Format(PATH_FORMAT, dataName);
+            var text = File.ReadAllText(path, Encoding.UTF8);
+            var data = JsonMapper.ToObject(text);
+            loadedData.Add(dataName, data);
+            return data;
+#else
+            //todo   by resourceMgr Load Data File
+
             return null;
+#endif
         }
     }
 }

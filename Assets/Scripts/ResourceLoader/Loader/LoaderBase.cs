@@ -6,7 +6,8 @@ namespace Plot.Resource
 {
     public abstract class LoaderBase
     {
-        public abstract IEnumerator LoadAssetsIEnumerator(string path, Type resType, CallBack<AssetsData> callback);
+        public LoaderBase(){ }
+        public abstract IEnumerator LoadAssetsIEnumerator(string path, Type resType, Action<AssetsData> callback);
         public abstract AssetsData LoadAssets(string path);
         public abstract AssetsData LoadAssets<T>(string path) where T : UnityEngine.Object;
         public virtual string[] GetAllDependenciesName(string name) { return new string[0]; }

@@ -9,7 +9,8 @@ namespace Plot.Resource
 {
     public class ResourcesLoader : LoaderBase
     {
-        public override IEnumerator LoadAssetsIEnumerator(string path, Type resType, CallBack<AssetsData> callback)
+        public ResourcesLoader() { }
+        public override IEnumerator LoadAssetsIEnumerator(string path, Type resType, Action<AssetsData> callback)
         {
             AssetsData assetsData = null;
             string newPath = PathUtils.RemoveExtension(path);

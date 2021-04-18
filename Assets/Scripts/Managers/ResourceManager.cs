@@ -62,8 +62,8 @@ namespace Plot.Resource
 
         public Object LoadResourceAssets(string name)
         {
-            string path = PathUtils.GetAbsolutePath(ResLoadLocation.Resource, name);
-            AssetsData assets = loadController.LoadAssets(path);
+            //string path = PathUtils.GetAbsolutePath(ResLoadLocation.Resource, name);
+            AssetsData assets = loadController.LoadAssets(name);
             if (assets != null)
                 return assets.Assets[0];
             return null;
@@ -71,20 +71,20 @@ namespace Plot.Resource
 
         public void LoadResourceAsync(string name, Action<Object> callBack)
         {
-            string path = PathUtils.GetAbsolutePath(ResLoadLocation.Resource, name);
-            loadController.LoadAsync(path, null, callBack);
+            //string path = PathUtils.GetAbsolutePath(ResLoadLocation.Resource, name);
+            loadController.LoadAsync(name, null, callBack);
         }
         public void LoadResourceAsync(string name, Type resType, Action<Object> callBack)
         {
-            string path = PathUtils.GetAbsolutePath(ResLoadLocation.Resource, name);
-            loadController.LoadAsync(path, resType, callBack);
+            //string path = PathUtils.GetAbsolutePath(ResLoadLocation.Resource, name);
+            loadController.LoadAsync(name, resType, callBack);
         }
 
         public T LoadResourceAssets<T>(string name) where T : Object
         {
             T res = null;
-            string path = PathUtils.GetAbsolutePath(ResLoadLocation.Resource, name);
-            AssetsData assets = loadController.LoadAssets<T>(path);
+            //string path = PathUtils.GetAbsolutePath(ResLoadLocation.Resource, name);
+            AssetsData assets = loadController.LoadAssets<T>(name);
             if (assets != null)
                 res = assets.GetAssets<T>();
             if(res == null)

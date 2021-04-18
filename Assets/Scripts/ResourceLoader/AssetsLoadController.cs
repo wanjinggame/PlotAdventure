@@ -255,9 +255,4 @@ namespace Plot.Resource
         #endregion
 
     }
-
-    class MonoRuntime : TSingletonMono<MonoRuntime>
-    {
-
-    }
 }

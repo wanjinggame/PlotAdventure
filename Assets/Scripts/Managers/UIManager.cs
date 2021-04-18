@@ -67,7 +67,7 @@ namespace Plot.UI
                 return null;
             }
             //to do  resourceManager load ui prefab
-            var uiPrefab = GameApp.instance.resourceManager.Load<GameObject>(path);
+            var uiPrefab = GameApp.instance.resourceManager.LoadResourceAssets<GameObject>(path);
             if (uiPrefab)
             {
                 var go = UnityEngine.Object.Instantiate(uiPrefab);

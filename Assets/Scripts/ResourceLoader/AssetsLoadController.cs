@@ -6,6 +6,7 @@ using System.Linq;
 using Object = UnityEngine.Object;
 using Plot.Utility;
 using System.Data;
+using UnityEditor;
 
 namespace Plot.Resource
 {
@@ -14,6 +15,7 @@ namespace Plot.Resource
         private Dictionary<string, AssetsData> assetsDics = new Dictionary<string, AssetsData>();
         private LoaderBase loader;
         private AssetsLoadType loadType;
+
 
         public AssetsLoadController(AssetsLoadType loadType)
         {
@@ -33,6 +35,7 @@ namespace Plot.Resource
             return assetsDics;
         }
 
+        #region 加载资源
         private void LoadAssetsDependencie(string path)
         {
             string[] dependenciesNames = loader.GetAllDependenciesName(path);
@@ -41,7 +44,7 @@ namespace Plot.Resource
                 LoadAssets(item);
             }
         }
-        public AssetsData LoadAssetsLogic(string path, Func<bool> checkContainsAssets, Func<string,AssetsData> loadFunc)
+        public AssetsData LoadAssetsLogic(string path, Func<bool> checkContainsAssets, Func<string, AssetsData> loadFunc)
         {
             LoadAssetsDependencie(path);
             AssetsData assets = null;
@@ -130,8 +133,8 @@ namespace Plot.Resource
             {
                 AssetsData assets = assetsDics[path];
                 assets.refCount++;
-               
-                if(callback != null)
+
+                if (callback != null)
                 {
                     callback(assets.Assets[0]);
                 }
@@ -153,8 +156,104 @@ namespace Plot.Resource
 
         public void LoadAsync(string path, Type assetType, Action<Object> callback)
         {
-            MonoRuntime.Instance.StartCoroutine(LoadAssetsIEnumerator(path,assetType,callback));
+            MonoRuntime.Instance.StartCoroutine(LoadAssetsIEnumerator(path, assetType, callback));
         }
+
+
+        #endregion
+
+
+        #region 卸载资源
+
+        public void DestoryAssetsCounter(string path)
+        {
+            if (assetsDics.ContainsKey(path))
+            {
+                AssetsData assets = assetsDics[path];
+                assets.refCount--;
+
+                if (assets.refCount < 0)
+                {
+                    Debug.LogError("资源引用计数错误：(" + assets.refCount + ") " + assets.assetPath);
+                    assets.refCount = 0;
+                }
+                if (assets.refCount == 0)
+                {
+                    //TO DO
+                }
+                string[] dependenciesNames = loader.GetAllDependenciesName(path);
+                foreach (var item in dependenciesNames)
+                {
+                    DestoryAssetsCounter(item);
+                }
+            }
+            else
+            {
+                Debug.LogError("未加载资源，不能Destroy ：" + path);
+            }
+        }
+
+        public void ReleaseAll(bool isForceAB)
+        {
+            foreach (var item in assetsDics)
+            {
+                UnloadAssets(item.Value, isForceAB);
+            }
+            assetsDics.Clear();
+        }
+
+        public void Release(string path)
+        {
+            AssetsData assets = null;
+            if(assetsDics.TryGetValue(path, out assets))
+            {
+                if(assets.refCount <= 0)
+                {
+                    UnloadAssets(assets, true);
+                    assetsDics.Remove(path);
+                    Debug.LogWarning("彻底释放" + path);
+                }
+            }
+        }
+
+        public void UnloadAssets(AssetsData assets, bool isForceAB)
+        {
+            if (assets.Assets != null && isForceAB)
+            {
+                foreach (var item in assets.Assets)
+                {
+                    Debug.LogWarning("释放资源" + item);
+                    UnloadObject(item);
+                }
+                assets.Assets = null;
+            }
+            if (assets.AssetBundle != null)
+                assets.AssetBundle.Unload(isForceAB);
+        }
+
+        public void UnloadObject(Object obj)
+        {
+            if (obj == null)
+                return;
+            if (obj is Shader)
+                return;
+            if (!(obj is GameObject) && !(obj is Component) && !(obj is AssetBundle))
+            {
+                Resources.UnloadAsset(obj);
+            } else if ((obj is GameObject) || (obj is Component))
+            {
+                if (loadType == AssetsLoadType.AssetBundle)
+                    Object.DestroyImmediate(obj, true);
+            }
+            else
+            {
+                AssetBundle ab = (AssetBundle)obj;
+                ab.Unload(true);
+            }
+        }
+
+        #endregion
+
     }
 
     class MonoRuntime : TSingletonMono<MonoRuntime>

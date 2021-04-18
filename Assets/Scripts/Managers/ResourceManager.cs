@@ -1,21 +1,34 @@
 using Plot.Core;
 using Plot.Utility;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Object = UnityEngine.Object;
 
 namespace Plot.Resource
 {
     public class ResourceManager : BaseManager
     {
         private List<Object> loadedObjs;
+        private AssetsLoadController loadController;
+        private AssetsLoadType loadType;
+
+        public AssetsLoadController LoadController 
+        {
+            get { return loadController; }
+        }
+
+        public AssetsLoadType LoadType
+        {
+            get { return loadType; }
+        }
 
         public override void Init()
         {
             base.Init();
             loadedObjs = new List<Object>();
-
+            InitLoadType();
             if (GameLog.EnableLog(GameLog.LV_DEBUG))
             {
                 GameLog.Log("ResourceManager Init Success...");
@@ -40,7 +53,48 @@ namespace Plot.Resource
 
         }
 
-        public T Load<T>(string resPath) where T : Object
+        private void InitLoadType()
+        {
+            loadType = Application.platform == RuntimePlatform.WindowsEditor ? AssetsLoadType.Resources : AssetsLoadType.AssetBundle;
+            loadController = new AssetsLoadController(loadType);
+        }
+
+
+        public Object LoadResourceAssets(string name)
+        {
+            string path = PathUtils.GetAbsolutePath(ResLoadLocation.Resource, name);
+            AssetsData assets = loadController.LoadAssets(path);
+            if (assets != null)
+                return assets.Assets[0];
+            return null;
+        }
+
+        public void LoadResourceAsync(string name, Action<Object> callBack)
+        {
+            string path = PathUtils.GetAbsolutePath(ResLoadLocation.Resource, name);
+            loadController.LoadAsync(path, null, callBack);
+        }
+        public void LoadResourceAsync(string name, Type resType, Action<Object> callBack)
+        {
+            string path = PathUtils.GetAbsolutePath(ResLoadLocation.Resource, name);
+            loadController.LoadAsync(path, resType, callBack);
+        }
+
+        public T LoadResourceAssets<T>(string name) where T : Object
+        {
+            T res = null;
+            string path = PathUtils.GetAbsolutePath(ResLoadLocation.Resource, name);
+            AssetsData assets = loadController.LoadAssets<T>(path);
+            if (assets != null)
+                res = assets.GetAssets<T>();
+            if(res == null)
+            {
+                Debug.LogError("Error=> Load Name :" + name + "  Type:" + typeof(T).FullName + "\n" + " Load Object:" + res);
+            }
+            return res;
+        }
+
+            public T Load<T>(string resPath) where T : Object
         {
 
             return null;

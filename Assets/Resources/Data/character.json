@@ -1,0 +1,31 @@
+﻿
+{
+    "10001" : {
+        "id" : 10001,
+        "name" : "\u88F4\u6B63\u731B",
+        "model" : "\u6682\u65E0",
+        "otherInfo" : "\u4E00\u4E2A\u5E05\u54E5",
+        "sex"       : 0
+    },
+    "10003" : {
+        "id" : 10003,
+        "name" : "\u8001\u9038",
+        "model" : "no",
+        "otherInfo" : "\u8D3A\u5927\u96D5",
+        "sex"       : 0
+    },
+    "10002" : {
+        "id" : 10002,
+        "name" : "\u6D0B\u6D0B",
+        "sex"  : 0,
+        "model" : "no",
+        "otherInfo" : "\u6709\u8BF7\u4E0A\u6D77\u738B"
+    },
+    "10004" : {
+        "id" : 10004,
+        "name" : "\u8D75\u4E91",
+        "sex"  : 0,
+        "model" : "no",
+        "otherInfo" : "\u5E38\u5C71\u8D75\u5B50\u9F99"
+    }
+}

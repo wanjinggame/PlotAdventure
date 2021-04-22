@@ -29,7 +29,7 @@ namespace Plot.Tools
             SaveJson(jsonData, "scene_data");
         }
 
-        static void SaveJson(JsonData data, string dataName)
+        public static void SaveJson(JsonData data, string dataName)
         {
             StringBuilder sb = new StringBuilder();
             JsonWriter jsonWriter = new JsonWriter(sb);

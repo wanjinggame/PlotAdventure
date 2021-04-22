@@ -1,6 +1,7 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
+using UnityEditor.Custom;
 
 namespace UnityEditor
 {
@@ -466,6 +467,84 @@ namespace UnityEditor
                 GUILayout.FlexibleSpace();
             }
             return Mathf.Clamp(curPage, 0, maxPage - 1);
+        }
+
+        public static bool Header(string title, bool foldout, System.Action menuClick)
+        {
+            var display = foldout;
+
+            var rect = GUILayoutUtility.GetRect(16f, 22f, Styling.header);
+            GUI.Box(rect, $"<size=12><b>{title}</b></size>", Styling.header);
+
+            var e = Event.current;
+
+            var popupRect = new Rect(rect.x + rect.width - Styling.paneOptionsIcon.width - 5f, rect.y + Styling.paneOptionsIcon.height / 2f + 1f, Styling.paneOptionsIcon.width, Styling.paneOptionsIcon.height);
+            if (menuClick != null)
+            {
+                GUI.DrawTexture(popupRect, Styling.paneOptionsIcon);
+            }
+
+            var foldoutRect = new Rect(rect.x + 4f, rect.y + 2f, 13f, 13f);
+            if (e.type == EventType.Repaint)
+                Styling.headerFoldout.Draw(foldoutRect, false, false, display, false);
+
+            var toggleRect = popupRect;
+            Vector2 toggleSize = Styling.headerCheckbox.CalcSize(GUIContent.none);
+            Vector2 labelSize = EditorStyles.label.CalcSize(new GUIContent(title));
+            toggleRect.x -= toggleSize.x + labelSize.x + 5f;
+            toggleRect.y = rect.y + 4f;
+            toggleRect.width = toggleSize.x;
+            toggleRect.height = rect.height;
+            if (e.type == EventType.Repaint)
+            {
+                //Styling.headerCheckbox.Draw(toggleRect, "", false, true, !foldout, false);
+                //toggleRect.x += toggleSize.x;
+                //toggleRect.y = rect.y + 2f;
+                //toggleRect.width = labelSize.x;
+                //EditorStyles.label.Draw(toggleRect, GUIContent.none, false, true, true, false);
+            }
+            else
+            {
+                toggleRect.width += labelSize.x;
+            }
+
+            if (e.type == EventType.MouseDown)
+            {
+                const float kOffset = 2f;
+                toggleRect.x -= kOffset;
+                toggleRect.y -= kOffset;
+                toggleRect.width += kOffset * 2f;
+                toggleRect.height += kOffset * 2f;
+
+                if (toggleRect.Contains(e.mousePosition))
+                {
+                    //overrideField.boolValue = !overrideField.boolValue;
+                    //foldout = !foldout;
+                    e.Use();
+                    GUI.changed = true;
+                }
+                else if (popupRect.Contains(e.mousePosition))
+                {
+                    if (menuClick != null)
+                    {
+                        menuClick();
+                    }
+                }
+                else if (rect.Contains(e.mousePosition))
+                {
+                    if (e.button == 0)
+                    {
+                        display = !display;
+                        //foldout = !foldout;
+                    }
+                    else if (menuClick != null)
+                    {
+                        menuClick();
+                    }
+                    e.Use();
+                }
+            }
+            return display;
         }
 
         #endregion

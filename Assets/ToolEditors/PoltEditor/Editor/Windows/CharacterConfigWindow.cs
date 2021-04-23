@@ -176,6 +176,7 @@ namespace Plot.Tools.PlotEditor
             }
             if (showCharacterInfo = GUILayoutTools.Header(character.Name + " 详细配置", showCharacterInfo, null))
             {
+                GUILayout.BeginVertical("helpbox");
                 character.Id = EditorGUILayout.IntField("角色ID", character.Id);
 
                 character.Name = EditorGUILayout.TextField("角色名", character.Name);
@@ -194,7 +195,7 @@ namespace Plot.Tools.PlotEditor
 
                 EditorGUILayout.LabelField("人物简介");
                 character.otherInfo = EditorGUILayout.TextArea(character.otherInfo);
-
+                GUILayout.EndVertical();
                 //to do   资源预览
             }
         }

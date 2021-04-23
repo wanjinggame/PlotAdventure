@@ -1,0 +1,35 @@
+﻿
+{
+    "1001" : {
+        "id" : 1001,
+        "desc" : "\u7B2C\u4E00\u7EC4\u5BF9\u767D",
+        "dialogues" : {
+            "0" : {
+                "dialogueType" : 0,
+                "characterId"  : 10001,
+                "content"      : "\u4F60\u5728\u5E72\u4EC0\u4E48\uFF1F\u4E3A\u4EC0\u4E48\u8FD8\u5728\u5199\u4EE3\u7801\uFF1F"
+            },
+            "1" : {
+                "dialogueType" : 0,
+                "characterId"  : 10002,
+                "content"      : "\u5C31\u597D\u8FD9\u53E3\u3002\u3002\u3002  \u4E0D\u7136\u548B\u5F00\u4FDD\u65F6\u6377"
+            }
+        }
+    },
+    "1002" : {
+        "id" : 1002,
+        "desc" : "\u7B2C\u4E8C\u7EC4\u5BF9\u767D",
+        "dialogues" : {
+            "0" : {
+                "dialogueType" : 1,
+                "characterId"  : 0,
+                "content"      : "\u63A5\u4E0B\u6765\u8981\u8BF4\u7684\u4E8B\u60C5\uFF0C\u4F60\u4EEC\u53EF\u80FD\u4E0D\u4FE1\u3002\n\u5728\u5F88\u4E45\u5F88\u4E45\u4EE5\u524D......"
+            },
+            "1" : {
+                "dialogueType" : 0,
+                "characterId"  : 10003,
+                "content"      : "\u7B49\u7B49\uFF01\u6211\u4E0D\u60F3\u542C"
+            }
+        }
+    }
+}

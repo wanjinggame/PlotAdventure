@@ -128,6 +128,7 @@ namespace Plot.Tools.PlotEditor
                         {
                             demoShowWinodw = GetWindow<DemoShowWinodw>(typeof(MainWinodws));
                         }
+                        demoShowWinodw.Focus();
                     }
                     GUILayout.FlexibleSpace();
                 }

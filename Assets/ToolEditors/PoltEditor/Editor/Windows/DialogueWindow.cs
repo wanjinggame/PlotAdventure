@@ -12,7 +12,6 @@ namespace Plot.Tools.PlotEditor
     // to do
     public class DialogueWindow : EditorWindow
     {
-        [MenuItem("Polt/剧情对白编辑器")]
         public static void Open()
         {
             GetWindow<DialogueWindow>();
@@ -30,32 +29,17 @@ namespace Plot.Tools.PlotEditor
         private void OnEnable()
         {
             titleContent = new GUIContent("对白编辑器");
+            minSize = new Vector2(1172, 745);
             searchField = new SearchField();
-            Init();
         }
 
-        public void Init()
+        public void Init(List<DialogueGroup> dialogueGroups)
         {
-            dialogueGroups = new List<DialogueGroup>();
-            if (File.Exists(string.Format(Const.DATA_PATH, Const.DIALOGUE_GROUP_DATA)))
-            {
-                var datas = JsonMapper.ToObject(File.ReadAllText(string.Format(Const.DATA_PATH, Const.DIALOGUE_GROUP_DATA)));
-                foreach (var key in datas.Keys)
-                {
-                    var id = int.Parse(key);
-                    var ch = new DialogueGroup();
-                    ch.FromJson(datas[key]);
-                    dialogueGroups.Add(ch);
-                }
-            }
+            this.dialogueGroups = dialogueGroups;
         }
 
         private void OnGUI()
         {
-            if (Event.current.type == EventType.MouseDown)
-            {
-                GUI.FocusControl(null);
-            }
             GUILayoutTools.DrawTitle("对白编辑器");
             GUILayoutTools.Separator_NoSpaceDoubleLine();
             ToolBar();
@@ -83,7 +67,10 @@ namespace Plot.Tools.PlotEditor
                 }
                 GUILayout.FlexibleSpace();
             }
-            GUILayout.Label("");
+            if (Event.current.type == EventType.MouseDown)
+            {
+                GUI.FocusControl(null);
+            }
             Repaint();
         }
 
@@ -132,6 +119,7 @@ namespace Plot.Tools.PlotEditor
 
         private void DrawDialogue(Dialogue dialogue)
         {
+            var ev = Event.current;
             GUILayout.BeginVertical("helpbox");
             dialogue.dialogueType = (DialogueType)EditorGUILayout.EnumPopup("对白类型", dialogue.dialogueType);
             if (dialogue.dialogueType != DialogueType.Narrator_旁白)
@@ -141,11 +129,26 @@ namespace Plot.Tools.PlotEditor
                     dialogue.characterId = EditorGUILayout.IntField("这话谁说的", dialogue.characterId);
                     if (GUILayout.Button("选择", GUILayout.Width(50)))
                     {
-
+                        CharacterSelectPopup.Open(ev, (id) =>
+                        {
+                            dialogue.characterId = id;
+                        });
                     }
                 }
+                var ch = MainWinodws.Instance.characterInfos.Find((c) => { return c.Id == dialogue.characterId; });
+                if (ch != null)
+                {
+                    EditorGUILayout.LabelField(string.Format("【{0}】说到：", ch.Name));
+                }
+                else
+                {
+                    EditorGUILayout.LabelField("找不到是哪个角色说的以下内容");
+                }
             }
-            EditorGUILayout.LabelField("内容");
+            else
+            {
+                EditorGUILayout.LabelField("旁白内容");
+            }
             dialogue.content = EditorGUILayout.TextArea(dialogue.content);
             GUILayout.EndVertical();
         }
@@ -224,6 +227,85 @@ namespace Plot.Tools.PlotEditor
             GUILayout.Label("");
             GUILayout.Space(3);
             GUILayout.EndHorizontal();
+        }
+    }
+
+
+    public class CharacterSelectPopup : PopupWindowContent
+    {
+        static Action<int> action;
+
+        public static void Open(Event evt, Action<int> cb)
+        {
+            action = cb;
+            PopupWindow.Show(new Rect(evt.mousePosition.x, evt.mousePosition.y, 0, 0), new CharacterSelectPopup());
+        }
+
+        SearchField searchField;
+        private string searchName = "";
+        private Vector2 scPos;
+
+        string curId;
+
+        public override void OnOpen()
+        {
+            base.OnOpen();
+            searchField = new SearchField();
+        }
+
+        public override void OnClose()
+        {
+            base.OnClose();
+            action = null;
+        }
+
+        public override Vector2 GetWindowSize()
+        {
+            return new Vector2(300, 400);
+        }
+
+        public override void OnGUI(Rect rect)
+        {
+            using (new GUILayout.VerticalScope(EditorStyles.helpBox))
+            {
+                GUILayoutTools.DrawTitle("角色选择");
+                searchName = searchField.OnGUI(searchName);
+                using (var sc = new GUILayout.ScrollViewScope(scPos, "Box"))
+                {
+                    foreach (var ch in MainWinodws.Instance.characterInfos)
+                    {
+                        var name = ch.Name;
+                        var id = ch.Id.ToString();
+                        if (name.ToLower().Contains(searchName.ToLower()) ||
+                            id.ToLower().Contains(searchName.ToLower()))
+                        {
+                            using (new GUILayout.HorizontalScope())
+                            {
+                                Color c = GUI.color;
+                                bool isSelect = curId == name;
+                                GUI.color = isSelect ? Color.green : c;
+                                if (GUILayout.Button(name + " : " + id, GUILayout.Height(18f)))
+                                {
+                                    curId = name;
+                                    if (isSelect)
+                                    {
+                                        if (action != null) action(ch.Id);
+                                        editorWindow.Close();
+                                    }
+                                }
+                                if (GUILayout.Button("选 择", GUILayout.Height(18f), GUILayout.Width(60f)))
+                                {
+                                    if (action != null) action(ch.Id);
+                                    editorWindow.Close();
+                                }
+                                GUI.color = c;
+                            }
+                        }
+                    }
+                    scPos = sc.scrollPosition;
+                }
+            }
+
         }
     }
 }

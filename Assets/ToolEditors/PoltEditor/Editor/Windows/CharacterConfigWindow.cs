@@ -11,7 +11,6 @@ namespace Plot.Tools.PlotEditor
 {
     public class CharacterConfigWindow : EditorWindow
     {
-        [MenuItem("Polt/Ω«…´≈‰÷√")]
         public static void Open()
         {
             GetWindow<CharacterConfigWindow>();
@@ -28,33 +27,17 @@ namespace Plot.Tools.PlotEditor
         private void OnEnable()
         {
             titleContent = new GUIContent("Ω«…´≈‰÷√");
+            minSize = new Vector2(1172, 745);
             searchField = new SearchField();
-            Init();
         }
 
-        public void Init()
+        public void Init(List<CharacterInfo> characterInfos)
         {
-            characterInfos = new List<CharacterInfo>();
-            if (File.Exists(string.Format(Const.DATA_PATH, Const.CHARACTER_DATA)))
-            {
-                var datas = JsonMapper.ToObject(File.ReadAllText(string.Format(Const.DATA_PATH, Const.CHARACTER_DATA)));
-                foreach (var key in datas.Keys)
-                {
-                    var id = int.Parse(key);
-                    var ch = new CharacterInfo();
-                    ch.FromJson(datas[key]);
-                    characterInfos.Add(ch);
-                }
-            }
+            this.characterInfos = characterInfos;
         }
 
         private void OnGUI()
         {
-            if (Event.current.type == EventType.MouseDown)
-            {
-                GUI.FocusControl(null);
-            }
-
             GUILayoutTools.DrawTitle("Ω«…´≈‰÷√");
             GUILayoutTools.Separator_NoSpaceDoubleLine();
             ToolBar();
@@ -84,6 +67,10 @@ namespace Plot.Tools.PlotEditor
             }
             GUILayout.Label("");
             Repaint();
+            if (Event.current.type == EventType.MouseDown)
+            {
+                GUI.FocusControl(null);
+            }
         }
 
         private void Save()

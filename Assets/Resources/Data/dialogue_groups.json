@@ -6,7 +6,7 @@
         "dialogues" : {
             "0" : {
                 "dialogueType" : 0,
-                "characterId"  : 10001,
+                "characterId"  : 10004,
                 "content"      : "\u4F60\u5728\u5E72\u4EC0\u4E48\uFF1F\u4E3A\u4EC0\u4E48\u8FD8\u5728\u5199\u4EE3\u7801\uFF1F"
             },
             "1" : {

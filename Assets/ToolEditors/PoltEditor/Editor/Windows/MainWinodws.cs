@@ -11,6 +11,7 @@ namespace Plot.Tools.PlotEditor
     {
         DialogueWindow dialogueWindow;
         CharacterConfigWindow characterConfigWindow;
+        DemoShowWinodw demoShowWinodw;
 
         public static MainWinodws Instance;
 
@@ -74,7 +75,7 @@ namespace Plot.Tools.PlotEditor
             }
         }
 
-        private List<DialogueGroup> dialogueGroups;
+        public List<DialogueGroup> dialogueGroups;
         public List<CharacterInfo> characterInfos;
 
         public void OnGUI()
@@ -121,13 +122,25 @@ namespace Plot.Tools.PlotEditor
                 using (new GUILayout.HorizontalScope())
                 {
                     GUILayout.FlexibleSpace();
+                    if (GUILayout.Button("对白演示", GUILayout.Height(70), GUILayout.Width(position.width * 0.3f)))
+                    {
+                        if(demoShowWinodw == null)
+                        {
+                            demoShowWinodw = GetWindow<DemoShowWinodw>(typeof(MainWinodws));
+                        }
+                    }
+                    GUILayout.FlexibleSpace();
+                }
+                using (new GUILayout.HorizontalScope())
+                {
+                    GUILayout.FlexibleSpace();
                     if (GUILayout.Button("对白场景布置(待开发)", GUILayout.Height(70), GUILayout.Width(position.width * 0.3f)))
                     {
    
                     }
                     GUILayout.FlexibleSpace();
                 }
-                GUILayout.Space(position.height * 0.2f);
+                GUILayout.Space(position.height * 0.1f);
                 GUILayout.FlexibleSpace();
             }
             GUILayout.FlexibleSpace();

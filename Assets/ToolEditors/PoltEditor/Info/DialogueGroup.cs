@@ -9,6 +9,8 @@ namespace Plot.Tools.PlotEditor
     {
         public JsonData jsonData { get; set; }
 
+        public int curIndex = -1;
+
         public int Id
         {
             get

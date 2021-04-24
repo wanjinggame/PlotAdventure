@@ -90,6 +90,18 @@ namespace Plot.Tools.PlotEditor
         {
             return jsonData;
         }
+
+        public string ShowText()
+        {
+            if(dialogueType == DialogueType.Narrator_ÅÔ°×)
+            {
+                return content;
+            }
+            else
+            {
+                return string.Format("{0}£º{1}", characterId, content);
+            }
+        }
     }
 }
 

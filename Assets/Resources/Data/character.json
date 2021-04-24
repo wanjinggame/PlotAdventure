@@ -19,7 +19,7 @@
         "name" : "\u6D0B\u6D0B",
         "sex"  : 0,
         "model" : "no",
-        "otherInfo" : "\u6709\u8BF7\u4E0A\u6D77\u738B"
+        "otherInfo" : "\u6709\u8BF7\u4E0A\u6D77\u738B\n\u6280\u80FD\uFF1A\u7834\u5934\u4E4B\u672F\n\u627E\u8DEF\u534A\u5C0F\u65F6"
     },
     "10004" : {
         "id" : 10004,
@@ -27,5 +27,26 @@
         "sex"  : 0,
         "model" : "no",
         "otherInfo" : "\u5E38\u5C71\u8D75\u5B50\u9F99"
+    },
+    "10005" : {
+        "id" : 10005,
+        "name" : "\u8001\u519C",
+        "sex"  : 0,
+        "model" : "no",
+        "otherInfo" : "\u8001\u519C\u4E00\u4F4D"
+    },
+    "10006" : {
+        "id" : 10006,
+        "name" : "\u4E0A\u6821",
+        "sex"  : 0,
+        "model" : "no",
+        "otherInfo" : "\u519B\u5B98"
+    },
+    "10007" : {
+        "id" : 10007,
+        "name" : "\u6797\u80AF",
+        "sex"  : 0,
+        "model" : "no",
+        "otherInfo" : "\u603B\u7EDF\u554A\u5582"
     }
 }

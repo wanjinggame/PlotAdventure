@@ -44,7 +44,7 @@ namespace Plot.Tools.PlotEditor
             GUILayout.Space(5);
             using (new GUILayout.HorizontalScope())
             {
-                using (new GUILayout.VerticalScope(GUILayout.Width(position.width * 0.4f)))
+                using (new GUILayout.VerticalScope(GUILayout.Width(position.width * 0.3f)))
                 {
                     DrawList();
                 }
@@ -104,7 +104,7 @@ namespace Plot.Tools.PlotEditor
             search = searchField.OnGUI(search);
             using (new GUILayout.VerticalScope(StyleTools.Skin.box))
             {
-                var r = GUILayoutUtility.GetRect(position.width * 0.6f, 20);
+                var r = GUILayoutUtility.GetRect(position.width * 0.4f, 20);
                 r.width /= 2;
                 GUI.Label(r, "角色ID", EditorStyles.toolbarButton);
                 r.x += r.width;
@@ -115,7 +115,7 @@ namespace Plot.Tools.PlotEditor
                     if (character.Id.ToString().Contains(search) || character.Name.ToLower().Contains(search.ToLower()))
                     {
                         var evt = Event.current;
-                        var rect = GUILayoutUtility.GetRect(position.width * 0.6f, 20);
+                        var rect = GUILayoutUtility.GetRect(position.width * 0.4f, 20);
                         var newRect = new Rect(rect);
                         rect.width /= 2;
                         GUI.Label(rect, " " + character.Id, curChar == character ? "SelectionRect" : "Tooltip");
@@ -173,7 +173,7 @@ namespace Plot.Tools.PlotEditor
                 using (new GUILayout.HorizontalScope())
                 {
                     character.model = EditorGUILayout.TextField("模型/图片", character.model);
-                    if (GUILayout.Button("选择", EditorStyles.toolbarButton, GUILayout.Width(60)))
+                    if (GUILayout.Button("选择", GUILayout.Width(60)))
                     {
                         //todo  资源选择 
 

@@ -13,6 +13,11 @@
                 "dialogueType" : 0,
                 "characterId"  : 10002,
                 "content"      : "\u5C31\u597D\u8FD9\u53E3\u3002\u3002\u3002  \u4E0D\u7136\u548B\u5F00\u4FDD\u65F6\u6377"
+            },
+            "2" : {
+                "dialogueType" : 1,
+                "characterId"  : 0,
+                "content"      : "\u573A\u9762\u4E00\u5EA6\u53D8\u5F97\u5341\u5206\u5C34\u5C2C....\n\u597D\u50CF\u4FDD\u65F6\u6377\u90A3\u4E48\u5BB9\u6613\u641E\u5230\u4E00\u6837\u3002"
             }
         }
     },
@@ -29,6 +34,88 @@
                 "dialogueType" : 0,
                 "characterId"  : 10003,
                 "content"      : "\u7B49\u7B49\uFF01\u6211\u4E0D\u60F3\u542C"
+            }
+        }
+    },
+    "1003" : {
+        "id" : 1003,
+        "desc" : "\u6F14\u793A\u6865\u6BB5\u4E00",
+        "dialogues" : {
+            "0" : {
+                "dialogueType" : 1,
+                "characterId"  : 0,
+                "content"      : "\u6211\u4EEC\u65C5\u884C\u5230\u4E61\u95F4\uFF0C\u770B\u5230\u4E00\u4F4D\u8001\u519C\u628A\u5582\u725B\u7684\u8349\u6599\u94F2\u5230\u4E00\u95F4\u5C0F\u8305\u5C4B\u7684\u5C4B\u6A90\u4E0A\uFF0C\u4E0D\u514D\u611F\u5230\u5947\u602A\uFF0C\n\u4E8E\u662F"
+            },
+            "1" : {
+                "dialogueType" : 0,
+                "characterId"  : 10002,
+                "content"      : "\u8001\u516C\u516C\uFF0C\u4F60\u4E3A\u4EC0\u4E48\u4E0D\u628A\u5582\u725B\u7684\u8349\u653E\u5728\u5730\u4E0A\uFF0C\u8BA9\u5B83\u5403\uFF1F"
+            },
+            "2" : {
+                "dialogueType" : 0,
+                "characterId"  : 10005,
+                "content"      : "\u8FD9\u79CD\u8349\u8349\u8D28\u4E0D\u597D\uFF0C\u6211\u8981\u662F\u653E\u5728\u5730\u4E0A\u5B83\u5C31\u4E0D\u5C51\u4E00\u987E\uFF1B\n\u4F46\u662F\u6211\u653E\u5230\u8BA9\u5B83\u52C9\u5F3A\u53EF\u591F\u5F97\u7740\u7684\u5C4B\u6A90\u4E0A\uFF0C\u5B83\u4F1A\u52AA\u529B\u53BB\u5403\uFF0C\u76F4\u5230\u628A\u5168\u90E8\u8349\u6599\u5403\u4E2A\u7CBE\u5149\u3002"
+            },
+            "3" : {
+                "dialogueType" : 0,
+                "characterId"  : 10002,
+                "content"      : "\u4EBA\u591A\u534A\u662F\u751F\u6D3B\u5728\u731C\u60F3\u548C\u671F\u76FC\u4E2D\uFF0C\u5982\u679C\u4F60\u5BF9\u81EA\u5DF1\u7684\u672A\u6765\u4E00\u89C8\u65E0\u9057\uFF0C\u4E5F\u8BB8\u4E00\u5207\u90FD\u4F1A\u7D22\u7136\u65E0\u5473\u3002"
+            }
+        }
+    },
+    "1004" : {
+        "id" : 1004,
+        "desc" : "\u6F14\u793A\u6865\u6BB5\u4E8C",
+        "dialogues" : {
+            "0" : {
+                "dialogueType" : 1,
+                "characterId"  : 0,
+                "content"      : "\u9752\u5E74\u65F6\u4EE3\u7684\u6797\u80AF\u5728\u4F0A\u5229\u8BFA\u65AF\u5DDE\u7684\u5723\u52A0\u8499\u52A0\u5165\u4E86\u6C11\u5175\u3002\n\u4ED6\u7684\u4E0A\u6821\u6307\u6325\u5B98\u662F\u4E00\u4E2A\u77EE\u4E2A\u5B50\uFF0C\u800C\u6797\u80AF\u7684\u8EAB\u6750\u7279\u522B\u9AD8\u5927\uFF0C\u5927\u5927\u7684\u8D85\u8FC7\u4E86\u8FD9\u4F4D\u6307\u6325\u5B98\u3002\n\u7531\u4E8E\u81EA\u5DF1\u89C9\u5F97\u8EAB\u6750\u9AD8\uFF0C\u6797\u80AF\u4E60\u60EF\u4E8E\u5782\u7740\u5934\u3001\u5F2F\u7740\u8170\u8D70\u8DEF\u3002\n\u4E0A\u6821\u770B\u89C1\u4ED6\u90A3\u5F2F\u8170\u66F2\u80CC\u7684\u59FF\u52BF\u5341\u5206\u751F\u6C14\uFF0C\u628A\u4ED6\u627E\u6765\u8BAD\u65A5\u4E00\u987F\u3002"
+            },
+            "1" : {
+                "dialogueType" : 0,
+                "characterId"  : 10006,
+                "content"      : "\u542C\u7740\uFF0C\u963F\u4F2F\uFF01\n\u628A\u5934\u9AD8\u9AD8\u5730\u62AC\u8D77\u6765\uFF0C\u4F60\u8FD9\u4E2A\u5BB6\u4F19\uFF01"
+            },
+            "2" : {
+                "dialogueType" : 0,
+                "characterId"  : 10007,
+                "content"      : "\u9075\u547D\uFF0C\u5148\u751F\uFF01"
+            },
+            "3" : {
+                "dialogueType" : 0,
+                "characterId"  : 10006,
+                "content"      : "\u4F60\u7684\u5934\u8981\u9AD8\u9AD8\u5730\u62AC\u8D77\u6765\uFF0C\u4F60\u8FD9\u5BB6\u4F19\uFF01\u8981\u518D\u62AC\u9AD8\u4E00\u4E9B\u3002"
+            },
+            "4" : {
+                "dialogueType" : 1,
+                "characterId"  : 0,
+                "content"      : "\u6797\u80AF\u53EA\u5F97\u628A\u8EAB\u4F53\u633A\u76F4\uFF0C\u8116\u5B50\u4F38\u5F97\u957F\u957F\u7684..."
+            },
+            "5" : {
+                "dialogueType" : 0,
+                "characterId"  : 10007,
+                "content"      : "\u8FD9\u6837\u53EF\u4EE5\u5417\uFF1F"
+            },
+            "6" : {
+                "dialogueType" : 0,
+                "characterId"  : 10006,
+                "content"      : "\u8FD8\u8981\u518D\u62AC\u9AD8\u70B9\u3002"
+            },
+            "7" : {
+                "dialogueType" : 0,
+                "characterId"  : 10007,
+                "content"      : "\u662F\u4E0D\u662F\u8981\u6211\u6C38\u8FDC\u8FD9\u4E2A\u6837\u5B50\uFF1F"
+            },
+            "8" : {
+                "dialogueType" : 0,
+                "characterId"  : 10006,
+                "content"      : "\u5F53\u7136\uFF0C\u4F60\u8FD9\u4E2A\u5BB6\u4F19\uFF0C\u8FD9\u8FD8\u7528\u95EE\u5417\uFF1F"
+            },
+            "9" : {
+                "dialogueType" : 0,
+                "characterId"  : 10007,
+                "content"      : "\u5BF9\u4E0D\u8D77\uFF0C\u4E0A\u6821\u3002\u90A3\u4E48\u53EA\u597D\u4E0E\u4F60\u8BF4\u58F0\u518D\u4F1A\u5566\uFF0C\u56E0\u4E3A\u6211\u5C06\u6C38\u8FDC\u770B\u4E0D\u89C1\u4F60\u4E86\uFF01"
             }
         }
     }

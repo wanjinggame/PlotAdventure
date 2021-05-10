@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using LitJson;
 using UnityEngine;
+using UnityEditor;
 
 namespace Plot.Tools.PlotEditor
 {
@@ -89,6 +90,21 @@ namespace Plot.Tools.PlotEditor
             }
         }
 
+        private Texture _texture;
+
+        public Texture texture
+        {
+            get { return _texture; }
+            set
+            {
+                if(_texture != value)
+                {
+                    model = AssetDatabase.GetAssetPath(value);
+                }
+                _texture = value;
+            }
+        }
+
         public CharacterInfo()
         {
             jsonData = new JsonData();
@@ -97,6 +113,7 @@ namespace Plot.Tools.PlotEditor
         public void FromJson(JsonData jsonData)
         {
             this.jsonData = jsonData;
+            _texture = AssetDatabase.LoadAssetAtPath<Texture>(model);
         }
 
         public JsonData ToJson()

@@ -6,6 +6,7 @@ using LitJson;
 using System.IO;
 using UnityEditor.IMGUI.Controls;
 using System;
+using Sirenix.OdinInspector;
 
 namespace Plot.Tools.PlotEditor
 {
@@ -170,20 +171,19 @@ namespace Plot.Tools.PlotEditor
 
                 character.characterSex = (CharacterSex)EditorGUILayout.EnumPopup("性别", character.characterSex);
 
-                using (new GUILayout.HorizontalScope())
-                {
-                    character.model = EditorGUILayout.TextField("模型/图片", character.model);
-                    if (GUILayout.Button("选择", GUILayout.Width(60)))
-                    {
-                        //todo  资源选择 
-
-                    }
-                }
-
                 EditorGUILayout.LabelField("人物简介");
                 character.otherInfo = EditorGUILayout.TextArea(character.otherInfo);
+
+                character.texture = EditorGUILayout.ObjectField(character.texture, typeof(Texture), false) as Texture;
+
                 GUILayout.EndVertical();
+
                 //to do   资源预览
+                if (character.texture)
+                {
+                    var rect = GUILayoutUtility.GetRect(500, 800);
+                    GUI.DrawTexture(rect, character.texture, ScaleMode.ScaleToFit);
+                }
             }
         }
 

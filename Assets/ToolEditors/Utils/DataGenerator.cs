@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,5 +43,27 @@ namespace Plot.Tools
             }
             File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
         }
+        [MenuItem("DataGenerator/RenameFiles")]
+        static void RenameFiles()
+        {
+            string targetDir = @"C:\Projects\Git\PlotAdventure.git\trunk\Assets\Resources\Character";
+            var files = Directory.GetFiles(targetDir, "*.jpg", SearchOption.AllDirectories);
+            var resPath = "Assets/Resources/Character/{0}";
+            var count = 10682;
+            foreach (var file in files)
+            {
+                if (file.EndsWith(".jpg"))
+                {
+                    var name = Path.GetFileName(file);
+                    Debug.Log(string.Format(resPath, name) + " -->  " + string.Format(resPath + ".jpg", count));
+                    File.Copy(string.Format(resPath, name), string.Format(resPath + ".jpg", count));
+                    File.Delete(string.Format(resPath, name));
+                    count++;
+                }
+            }
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
     }
 }
+#endif

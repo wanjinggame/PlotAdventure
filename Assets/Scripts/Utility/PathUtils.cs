@@ -86,20 +86,45 @@ namespace Plot.Utility
             return builder.ToString();
         }
 
-        //public static string GetLoadPath(AssetsLoadType assetsloadType, string name)
-        //{
-        //    string path = string.Empty;
-        //    if (assetsloadType == AssetsLoadType.Resources)
-        //    {
-        //        path = GetAbsolutePath(ResLoadLocation.Resource,name);
-        //    }
-        //    else
-        //    {
-        //        path = GetAbsolutePath(ResLoadLocation.Streaming, name.ToLower());
-        //    }
-        //    return path;
+        public static string GetFileName(string path)
+        {
+            string name = "";
+            try
+            {
+                name = Path.GetFileName(path);
+            }
+            catch 
+            {
+                path = path.Replace("\\", "/");
+                if (!path.Contains("/"))
+                {
+                    return path;
+                }
+                string[] ss = path.Split(new string[] { "/" }, StringSplitOptions.None);
+                if (ss.Length > 0)
+                    return ss[ss.Length - 1];
+            }
+            return name; 
+        }
+        public static string GetAssetsBundlePersistentPath()
+        {
+            return Application.persistentDataPath + "/Resources/";
+        }
 
-        //}
+        public static string GetLoadPath(AssetsLoadType assetsloadType, string name)
+        {
+            string path = string.Empty;
+            if (assetsloadType == AssetsLoadType.Resources)
+            {
+                path = GetAbsolutePath(ResLoadLocation.Resource, name);
+            }
+            else
+            {
+                path = GetAssetsBundlePersistentPath() + path;
+            }
+            return path;
+
+        }
 
 
         /// <summary>
@@ -114,5 +139,7 @@ namespace Plot.Utility
                 ss = Path.ChangeExtension(path, null);
             return ss;
         }
+
+
     }
 }

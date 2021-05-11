@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 4068797638
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: resources/spheretest
+      Dependencies: {}

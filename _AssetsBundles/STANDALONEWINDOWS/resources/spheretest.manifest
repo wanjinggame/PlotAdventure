@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3607986575
+CRC: 259360483
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: bfcb249a38f91799728bc3ca49ade00b
+    Hash: 42f22234d6c6acf5b1e11dd5cf2107fc
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 357002b3b5d821a7b90e42d919d1ec65
+    Hash: b1c185c72cdafab906a20d7064a9cd59
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -23,12 +23,9 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
-- Class: 65
-  Script: {instanceID: 0}
 - Class: 135
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/Resources/Cube.prefab
 - Assets/Resources/SphereTest.prefab
 Dependencies: []

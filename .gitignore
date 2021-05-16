@@ -5,3 +5,4 @@ Logs/
 *.sln
 *.suo
 *.cache
+_AssetsBundles/

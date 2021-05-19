@@ -6,7 +6,7 @@ namespace Plot.Const
 {
     public class UIConst
     {
-        public const int UI_ID_INIT = 1; 
-
+        public const int UI_ID_INIT = 1;
+        public const int UI_ID_MAIN = 2;
     }
 }

@@ -6,6 +6,7 @@ using Plot.Const;
 using System;
 using Plot.Core;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 namespace Plot.UI
 {
@@ -45,6 +46,7 @@ namespace Plot.UI
         {
             uiTypes = new Dictionary<int, Type>();
             uiTypes.Add(UIConst.UI_ID_INIT, typeof(UIInitCtrl));
+            uiTypes.Add(UIConst.UI_ID_MAIN, typeof(UIMainCtrl));
         }
 
         public void SetupUI()
@@ -52,6 +54,7 @@ namespace Plot.UI
             uiPrefabs = new Dictionary<int, string>();
             //面板ID   prefab资源名
             uiPrefabs.Add(UIConst.UI_ID_INIT, "Init_Panel");
+            uiPrefabs.Add(UIConst.UI_ID_MAIN, "MainPlane");
         }
 
         public UIBase OpenUI(int uiId)
@@ -67,6 +70,7 @@ namespace Plot.UI
                 return null;
             }
             //to do  resourceManager load ui prefab
+            path = string.Concat("Prefab/UIPrefab/", path);
             var uiPrefab = GameApp.instance.resourceManager.LoadResourceAssets<GameObject>(path);
             if (uiPrefab)
             {
@@ -117,6 +121,10 @@ namespace Plot.UI
         {
             tran.SetParent(canvs);
             tran.localPosition = Vector3.zero;
+            tran.localScale = Vector3.one;
+            RectTransform rect = tran.GetComponent<RectTransform>();
+            rect.offsetMax = Vector2.zero;
+            rect.offsetMin = Vector2.zero;
         }
     }
 }

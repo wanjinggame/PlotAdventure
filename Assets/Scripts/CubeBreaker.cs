@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Plot.Resource;
+using Plot.Core;
+using Object = UnityEngine.Object;
 public class CubeBreaker : MonoBehaviour
 {
     [Header("生成小正方体的大小")]
@@ -24,8 +26,16 @@ public class CubeBreaker : MonoBehaviour
 
         cubesPivot = new Vector3(cubesPivotDistance, cubesPivotDistance, cubesPivotDistance);
 
+        GameApp.instance.resourceManager.LoadResourceAsync("Prefab/UIPrefab/Image", SetPre) ;
+        
     }
 
+    private void SetPre(Object obj)
+    {
+        GameObject go = GameObject.Instantiate(obj) as GameObject;
+        go.transform.SetParent(this.transform);
+       
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "Plane")
